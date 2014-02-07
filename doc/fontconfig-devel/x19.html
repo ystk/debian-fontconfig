@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -7,9 +7,9 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
-HREF="t1.html"><LINK
+HREF="index.html"><LINK
 REL="PREVIOUS"
-HREF="t1.html"><LINK
+HREF="index.html"><LINK
 REL="NEXT"
 TITLE="Datatypes"
 HREF="x31.html"></HEAD
@@ -40,9 +40,9 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="t1.html"
+HREF="index.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -56,7 +56,7 @@ VALIGN="bottom"
 ><A
 HREF="x31.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -69,7 +69,7 @@ CLASS="SECT1"
 CLASS="SECT1"
 ><A
 NAME="AEN19"
->FUNCTIONAL OVERVIEW</A
+>2. FUNCTIONAL OVERVIEW</A
 ></H1
 ><P
 >Fontconfig contains two essential modules, the configuration module which
@@ -82,11 +82,11 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="AEN22"
->FONT CONFIGURATION</A
+>2.1. FONT CONFIGURATION</A
 ></H2
 ><P
 >The configuration module consists of the FcConfig datatype, libexpat and
-FcConfigParse which walks over an XML tree and ammends a configuration with
+FcConfigParse which walks over an XML tree and amends a configuration with
 data found within.  From an external perspective, configuration of the
 library consists of generating a valid XML tree and feeding that to
 FcConfigParse.  The only other mechanism provided to applications for
@@ -118,87 +118,78 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="AEN27"
->FONT PROPERTIES</A
+>2.2. FONT PROPERTIES</A
 ></H2
 ><P
 >While font patterns may contain essentially any properties, there are some
 well known properties with associated types.  Fontconfig uses some of these
 properties for font matching and font completion.  Others are provided as a
-convenience for the applications rendering mechanism.
+convenience for the application's rendering mechanism.
     </P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="PROGRAMLISTING"
 >                 Property Definitions
 
-    Property       CPP Symbol           Type    Description
+    Property       C Preprocessor Symbol  Type    Description
     ----------------------------------------------------
-    family         FC_FAMILY            String  Font family names
-    familylang     FC_FAMILYLANG        String  Language cooresponding to
-                                                each family name
-    style          FC_STYLE             String  Font style. Overrides weight
-                                                and slant
-    stylelang      FC_STYLELANG         String  Language cooresponding to
-                                                each style name
-    fullname       FC_FULLNAME          String  Font face full name where
-                                                different from family and
-                                                family + style
-    fullnamelang   FC_FULLNAMELANG      String  Language cooresponding to
-                                                each fullname
-    slant          FC_SLANT             Int     Italic, oblique or roman
-    weight         FC_WEIGHT            Int     Light, medium, demibold,
-                                                bold or black
-    size           FC_SIZE              Double  Point size
-    width          FC_WIDTH             Int     Condensed, normal or expanded
-    aspect         FC_ASPECT            Double  Stretches glyphs horizontally
-                                                before hinting
-    pixelsize      FC_PIXEL_SIZE        Double  Pixel size
-    spacing        FC_SPACING           Int     Proportional, dual-width,
-                                                monospace or charcell
-    foundry        FC_FOUNDRY           String  Font foundry name
-    antialias      FC_ANTIALIAS         Bool    Whether glyphs can be
-                                                antialiased
-    hinting        FC_HINTING           Bool    Whether the rasterizer should
-                                                use hinting
-    hintstyle      FC_HINT_STYLE        Int     Automatic hinting style
-    verticallayout FC_VERTICAL_LAYOUT   Bool    Use vertical layout
-    autohint       FC_AUTOHINT          Bool    Use autohinter instead of
-                                                normal hinter
-    globaladvance  FC_GLOBAL_ADVANCE    Bool    Use font global advance data
-    file           FC_FILE              String  The filename holding the font
-    index          FC_INDEX             Int     The index of the font within
-                                                the file
-    ftface         FC_FT_FACE           FT_Face Use the specified FreeType
-                                                face object
-    rasterizer     FC_RASTERIZER        String  Which rasterizer is in use
-    outline        FC_OUTLINE           Bool    Whether the glyphs are outlines
-    scalable       FC_SCALABLE          Bool    Whether glyphs can be scaled
-    scale          FC_SCALE             Double  Scale factor for point-&#62;pixel
-                                                conversions
-    dpi            FC_DPI               Double  Target dots per inch
-    rgba           FC_RGBA              Int     unknown, rgb, bgr, vrgb,
-                                                vbgr, none - subpixel geometry
-    lcdfilter      FC_LCD_FILTER        Int     Type of LCD filter
-    minspace       FC_MINSPACE          Bool    Eliminate leading from line
-                                                spacing
-    charset        FC_CHARSET           CharSet Unicode chars encoded by
-                                                the font
-    lang           FC_LANG              LangSet Set of RFC-3066-style
-                                                languages this font supports
-    fontversion    FC_FONTVERSION       Int     Version number of the font
-    capability     FC_CAPABILITY        String  List of layout capabilities in
-                                                the font
-    embolden       FC_EMBOLDEN          Bool    Rasterizer should
-                                                synthetically embolden the font
+    family         FC_FAMILY              String  Font family names
+    familylang     FC_FAMILYLANG          String  Language corresponding to
+                                                  each family name
+    style          FC_STYLE               String  Font style. Overrides weight
+                                                  and slant
+    stylelang      FC_STYLELANG           String  Language corresponding to
+                                                  each style name
+    fullname       FC_FULLNAME            String  Font face full name where
+                                                  different from family and
+                                                  family + style
+    fullnamelang   FC_FULLNAMELANG        String  Language corresponding to
+                                                  each fullname
+    slant          FC_SLANT               Int     Italic, oblique or roman
+    weight         FC_WEIGHT              Int     Light, medium, demibold,
+                                                  bold or black
+    size           FC_SIZE                Double  Point size
+    width          FC_WIDTH               Int     Condensed, normal or expanded
+    aspect         FC_ASPECT              Double  Stretches glyphs horizontally
+                                                  before hinting
+    pixelsize      FC_PIXEL_SIZE          Double  Pixel size
+    spacing        FC_SPACING             Int     Proportional, dual-width,
+                                                  monospace or charcell
+    foundry        FC_FOUNDRY             String  Font foundry name
+    antialias      FC_ANTIALIAS           Bool    Whether glyphs can be
+                                                  antialiased
+    hinting        FC_HINTING             Bool    Whether the rasterizer should
+                                                  use hinting
+    hintstyle      FC_HINT_STYLE          Int     Automatic hinting style
+    verticallayout FC_VERTICAL_LAYOUT     Bool    Use vertical layout
+    autohint       FC_AUTOHINT            Bool    Use autohinter instead of
+                                                  normal hinter
+    globaladvance  FC_GLOBAL_ADVANCE      Bool    Use font global advance data
+    file           FC_FILE                String  The filename holding the font
+    index          FC_INDEX               Int     The index of the font within
+                                                  the file
+    ftface         FC_FT_FACE             FT_Face Use the specified FreeType
+                                                  face object
+    rasterizer     FC_RASTERIZER          String  Which rasterizer is in use
+    outline        FC_OUTLINE             Bool    Whether the glyphs are outlines
+    scalable       FC_SCALABLE            Bool    Whether glyphs can be scaled
+    scale          FC_SCALE               Double  Scale factor for point-&#62;pixel
+                                                  conversions
+    dpi            FC_DPI                 Double  Target dots per inch
+    rgba           FC_RGBA                Int     unknown, rgb, bgr, vrgb,
+                                                  vbgr, none - subpixel geometry
+    lcdfilter      FC_LCD_FILTER          Int     Type of LCD filter
+    minspace       FC_MINSPACE            Bool    Eliminate leading from line
+                                                  spacing
+    charset        FC_CHARSET             CharSet Unicode chars encoded by
+                                                  the font
+    lang           FC_LANG                LangSet Set of RFC-3066-style
+                                                  languages this font supports
+    fontversion    FC_FONTVERSION         Int     Version number of the font
+    capability     FC_CAPABILITY          String  List of layout capabilities in
+                                                  the font
+    embolden       FC_EMBOLDEN            Bool    Rasterizer should
+                                                  synthetically embolden the font
     </PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ></DIV
 ><DIV
@@ -217,16 +208,16 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="t1.html"
+HREF="index.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="t1.html"
+HREF="index.html"
 ACCESSKEY="H"
 >Home</A
 ></TD
@@ -237,7 +228,7 @@ VALIGN="top"
 ><A
 HREF="x31.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR

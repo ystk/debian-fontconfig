@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -7,7 +7,7 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
-HREF="t1.html"><LINK
+HREF="index.html"><LINK
 REL="PREVIOUS"
 TITLE="Datatypes"
 HREF="x31.html"></HEAD
@@ -40,7 +40,7 @@ VALIGN="bottom"
 ><A
 HREF="x31.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -63,10 +63,10 @@ CLASS="SECT1"
 CLASS="SECT1"
 ><A
 NAME="AEN102"
->FUNCTIONS</A
+>4. FUNCTIONS</A
 ></H1
 ><P
->These are grouped by functionality, often using the main datatype being
+>These are grouped by functionality, often using the main data type being
 manipulated.
   </P
 ><DIV
@@ -75,7 +75,7 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="AEN105"
->Initialization</A
+>4.1. Initialization</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -103,7 +103,7 @@ HREF="fcinit.html"
 ><A
 HREF="fcfini.html"
 >FcFini</A
->&nbsp;--&nbsp;finalize fonconfig library</DT
+>&nbsp;--&nbsp;finalize fontconfig library</DT
 ><DT
 ><A
 HREF="fcgetversion.html"
@@ -131,7 +131,7 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="AEN255"
->FcPattern</A
+>4.2. FcPattern</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -257,8 +257,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1052"
->FcFontSet</A
+NAME="AEN1056"
+>4.3. FcFontSet</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -319,8 +319,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1279"
->FcObjectSet</A
+NAME="AEN1283"
+>4.4. FcObjectSet</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -353,7 +353,7 @@ HREF="fcobjectsetbuild.html"
 ></DIV
 ><P
 >An FcObjectSet holds a list of pattern property names; it is used to
-indiciate which properties are to be returned in the patterns from
+indicate which properties are to be returned in the patterns from
 FcFontList.
     </P
 ></DIV
@@ -362,8 +362,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1389"
->FreeType specific functions</A
+NAME="AEN1393"
+>4.5. FreeType specific functions</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -381,12 +381,12 @@ HREF="fcfreetypecharindex.html"
 ><A
 HREF="fcfreetypecharset.html"
 >FcFreeTypeCharSet</A
->&nbsp;--&nbsp;compute unicode coverage</DT
+>&nbsp;--&nbsp;compute Unicode coverage</DT
 ><DT
 ><A
 HREF="fcfreetypecharsetandspacing.html"
 >FcFreeTypeCharSetAndSpacing</A
->&nbsp;--&nbsp;compute unicode coverage and spacing type</DT
+>&nbsp;--&nbsp;compute Unicode coverage and spacing type</DT
 ><DT
 ><A
 HREF="fcfreetypequery.html"
@@ -410,8 +410,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1518"
->FcValue</A
+NAME="AEN1522"
+>4.6. FcValue</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -445,9 +445,12 @@ HREF="fcvalueequal.html"
 ><P
 >FcValue is a structure containing a type tag and a union of all possible
 datatypes.  The tag is an enum of type 
-<I
+<SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >FcType</I
+></SPAN
 >
 and is intended to provide a measure of run-time
 typechecking, although that depends on careful programming.
@@ -458,8 +461,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1612"
->FcCharSet</A
+NAME="AEN1616"
+>4.7. FcCharSet</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -482,6 +485,11 @@ HREF="fccharsetdestroy.html"
 ><A
 HREF="fccharsetaddchar.html"
 >FcCharSetAddChar</A
+>&nbsp;--&nbsp;Add a character to a charset</DT
+><DT
+><A
+HREF="fccharsetdelchar.html"
+>FcCharSetDelChar</A
 >&nbsp;--&nbsp;Add a character to a charset</DT
 ><DT
 ><A
@@ -561,7 +569,7 @@ HREF="fccharsetnew.html"
 ></DL
 ></DIV
 ><P
->An FcCharSet is a boolean array indicating a set of unicode chars.  Those
+>An FcCharSet is a boolean array indicating a set of Unicode chars.  Those
 associated with a font are marked constant and cannot be edited.
 FcCharSets may be reference counted internally to reduce memory consumption;
 this may be visible to applications as the result of FcCharSetCopy may
@@ -573,8 +581,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN2066"
->FcLangSet</A
+NAME="AEN2094"
+>4.8. FcLangSet</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -603,6 +611,21 @@ HREF="fclangsetcopy.html"
 HREF="fclangsetadd.html"
 >FcLangSetAdd</A
 >&nbsp;--&nbsp;add a language to a langset</DT
+><DT
+><A
+HREF="fclangsetdel.html"
+>FcLangSetDel</A
+>&nbsp;--&nbsp;delete a language from a langset</DT
+><DT
+><A
+HREF="fclangsetunion.html"
+>FcLangSetUnion</A
+>&nbsp;--&nbsp;Add langsets</DT
+><DT
+><A
+HREF="fclangsetsubtract.html"
+>FcLangSetSubtract</A
+>&nbsp;--&nbsp;Subtract langsets</DT
 ><DT
 ><A
 HREF="fclangsetcompare.html"
@@ -658,8 +681,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN2360"
->FcMatrix</A
+NAME="AEN2464"
+>4.9. FcMatrix</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -714,8 +737,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN2554"
->FcConfig</A
+NAME="AEN2658"
+>4.10. FcConfig</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -882,8 +905,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN3267"
->FcObjectType</A
+NAME="AEN3371"
+>4.11. FcObjectType</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -910,7 +933,7 @@ HREF="fcnamegetobjecttype.html"
 ></DL
 ></DIV
 ><P
->Provides for applcation-specified font name object types so that new
+>Provides for application-specified font name object types so that new
 pattern elements can be generated from font names.
     </P
 ></DIV
@@ -919,8 +942,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN3340"
->FcConstant</A
+NAME="AEN3444"
+>4.12. FcConstant</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -960,8 +983,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN3438"
->FcBlanks</A
+NAME="AEN3542"
+>4.13. FcBlanks</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -1005,8 +1028,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN3529"
->FcAtomic</A
+NAME="AEN3633"
+>4.14. FcAtomic</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -1058,9 +1081,9 @@ HREF="fcatomicdestroy.html"
 ></DL
 ></DIV
 ><P
->These functions provide a safe way to update config files, allowing ongoing
-reading of the old config file while locked for writing and ensuring that a
-consistent and complete version of the config file is always available.
+>These functions provide a safe way to update configuration files, allowing ongoing
+reading of the old configuration file while locked for writing and ensuring that a
+consistent and complete version of the configuration file is always available.
     </P
 ></DIV
 ><DIV
@@ -1068,8 +1091,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN3706"
->File and Directory routines</A
+NAME="AEN3810"
+>4.15. File and Directory routines</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -1102,11 +1125,9 @@ HREF="fcdirsave.html"
 ><A
 HREF="fcdircacheunlink.html"
 >FcDirCacheUnlink</A
->&nbsp;--&nbsp;Remove all caches related to <TT
+>&nbsp;--&nbsp;Remove all caches related to <CODE
 CLASS="PARAMETER"
-><I
->dir</I
-></TT
+>dir</CODE
 ></DT
 ><DT
 ><A
@@ -1145,8 +1166,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN3979"
->FcCache routines</A
+NAME="AEN4083"
+>4.16. FcCache routines</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -1159,51 +1180,41 @@ CLASS="TOC"
 ><A
 HREF="fccachedir.html"
 >FcCacheDir</A
->&nbsp;--&nbsp;Return directory of <TT
+>&nbsp;--&nbsp;Return directory of <CODE
 CLASS="PARAMETER"
-><I
->cache</I
-></TT
+>cache</CODE
 ></DT
 ><DT
 ><A
 HREF="fccachecopyset.html"
 >FcCacheCopySet</A
->&nbsp;--&nbsp;Returns a copy of the fontset from <TT
+>&nbsp;--&nbsp;Returns a copy of the fontset from <CODE
 CLASS="PARAMETER"
-><I
->cache</I
-></TT
+>cache</CODE
 ></DT
 ><DT
 ><A
 HREF="fccachesubdir.html"
 >FcCacheSubdir</A
->&nbsp;--&nbsp;Return the <TT
+>&nbsp;--&nbsp;Return the <CODE
 CLASS="PARAMETER"
-><I
->i</I
-></TT
+>i</CODE
 >'th subdirectory.</DT
 ><DT
 ><A
 HREF="fccachenumsubdir.html"
 >FcCacheNumSubdir</A
->&nbsp;--&nbsp;Return the number of subdirectories in <TT
+>&nbsp;--&nbsp;Return the number of subdirectories in <CODE
 CLASS="PARAMETER"
-><I
->cache</I
-></TT
+>cache</CODE
 >.</DT
 ><DT
 ><A
 HREF="fccachenumfont.html"
 >FcCacheNumFont</A
->&nbsp;--&nbsp;Returns the number of fonts in <TT
+>&nbsp;--&nbsp;Returns the number of fonts in <CODE
 CLASS="PARAMETER"
-><I
->cache</I
-></TT
+>cache</CODE
 >.</DT
 ></DL
 ></DIV
@@ -1218,8 +1229,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN4098"
->FcStrSet and FcStrList</A
+NAME="AEN4202"
+>4.17. FcStrSet and FcStrList</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -1290,8 +1301,8 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN4336"
->String utilities</A
+NAME="AEN4440"
+>4.18. String utilities</A
 ></H2
 ><DIV
 CLASS="TOC"
@@ -1422,14 +1433,14 @@ VALIGN="top"
 ><A
 HREF="x31.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="t1.html"
+HREF="index.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

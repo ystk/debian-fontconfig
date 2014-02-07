@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -7,10 +7,10 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
-HREF="t1.html"><LINK
+HREF="index.html"><LINK
 REL="UP"
 TITLE="File and Directory routines"
-HREF="x102.html#AEN3706"><LINK
+HREF="x102.html#AEN3810"><LINK
 REL="PREVIOUS"
 TITLE="FcDirCacheValid"
 HREF="fcdircachevalid.html"><LINK
@@ -46,7 +46,7 @@ VALIGN="bottom"
 ><A
 HREF="fcdircachevalid.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -60,7 +60,7 @@ VALIGN="bottom"
 ><A
 HREF="fcdircacheread.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -75,7 +75,7 @@ NAME="FCDIRCACHELOAD"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN3882"
+NAME="AEN3986"
 ></A
 ><H2
 >Name</H2
@@ -83,7 +83,7 @@ NAME="AEN3882"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN3885"
+NAME="AEN3989"
 ></A
 ><H2
 >Synopsis</H2
@@ -92,45 +92,18 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN3886"
+NAME="AEN3990"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="FUNCSYNOPSISINFO"
->#include &#60;fontconfig.h&#62;
+>#include &lt;fontconfig.h&gt;
 	</PRE
-></TD
-></TR
-></TABLE
 ><P
 ><CODE
 ><CODE
 CLASS="FUNCDEF"
->FcCache * <TT
-CLASS="FUNCTION"
->FcDirCacheLoad</TT
-></CODE
->(const FcChar8 *<TT
-CLASS="PARAMETER"
-><I
->dir</I
-></TT
->, FcConfig *<TT
-CLASS="PARAMETER"
-><I
->config</I
-></TT
->, FcChar8 **<TT
-CLASS="PARAMETER"
-><I
->cache_file</I
-></TT
->);</CODE
+>FcCache * FcDirCacheLoad</CODE
+>(const FcChar8 *dir, FcConfig *config, FcChar8 **cache_file);</CODE
 ></P
 ><P
 ></P
@@ -139,23 +112,19 @@ CLASS="PARAMETER"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN3897"
+NAME="AEN4001"
 ></A
 ><H2
 >Description</H2
 ><P
->Loads the cache related to <TT
+>Loads the cache related to <CODE
 CLASS="PARAMETER"
-><I
->dir</I
-></TT
+>dir</CODE
 >. If no cache file
 exists, returns NULL. The name of the cache file is returned in
-<TT
+<CODE
 CLASS="PARAMETER"
-><I
->cache_file</I
-></TT
+>cache_file</CODE
 >, unless that is NULL. See also
 FcDirCacheRead.
 	    </P
@@ -163,12 +132,12 @@ FcDirCacheRead.
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN3902"
+NAME="AEN4006"
 ></A
 ><H2
 >Version</H2
 ><P
->Fontconfig version 2.8.0
+>Fontconfig version 2.9.0
 
 	    </P
 ></DIV
@@ -190,14 +159,14 @@ VALIGN="top"
 ><A
 HREF="fcdircachevalid.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="t1.html"
+HREF="index.html"
 ACCESSKEY="H"
 >Home</A
 ></TD
@@ -208,7 +177,7 @@ VALIGN="top"
 ><A
 HREF="fcdircacheread.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -222,7 +191,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="x102.html#AEN3706"
+HREF="x102.html#AEN3810"
 ACCESSKEY="U"
 >Up</A
 ></TD

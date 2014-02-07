@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -7,16 +7,16 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
-HREF="t1.html"><LINK
+HREF="index.html"><LINK
 REL="UP"
 TITLE="FcLangSet"
-HREF="x102.html#AEN2066"><LINK
+HREF="x102.html#AEN2094"><LINK
 REL="PREVIOUS"
 TITLE="FcLangSetCopy"
 HREF="fclangsetcopy.html"><LINK
 REL="NEXT"
-TITLE="FcLangSetCompare"
-HREF="fclangsetcompare.html"></HEAD
+TITLE="FcLangSetDel"
+HREF="fclangsetdel.html"></HEAD
 ><BODY
 CLASS="REFENTRY"
 BGCOLOR="#FFFFFF"
@@ -46,7 +46,7 @@ VALIGN="bottom"
 ><A
 HREF="fclangsetcopy.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -58,9 +58,9 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="fclangsetcompare.html"
+HREF="fclangsetdel.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -75,7 +75,7 @@ NAME="FCLANGSETADD"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN2140"
+NAME="AEN2168"
 ></A
 ><H2
 >Name</H2
@@ -83,7 +83,7 @@ NAME="AEN2140"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN2143"
+NAME="AEN2171"
 ></A
 ><H2
 >Synopsis</H2
@@ -92,40 +92,18 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN2144"
+NAME="AEN2172"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="FUNCSYNOPSISINFO"
->#include &#60;fontconfig.h&#62;
+>#include &lt;fontconfig.h&gt;
 	</PRE
-></TD
-></TR
-></TABLE
 ><P
 ><CODE
 ><CODE
 CLASS="FUNCDEF"
->FcBool <TT
-CLASS="FUNCTION"
->FcLangSetAdd</TT
-></CODE
->(FcLangSet *<TT
-CLASS="PARAMETER"
-><I
->ls</I
-></TT
->, const FcChar8 *<TT
-CLASS="PARAMETER"
-><I
->lang</I
-></TT
->);</CODE
+>FcBool FcLangSetAdd</CODE
+>(FcLangSet *ls, const FcChar8 *lang);</CODE
 ></P
 ><P
 ></P
@@ -134,27 +112,21 @@ CLASS="PARAMETER"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN2153"
+NAME="AEN2181"
 ></A
 ><H2
 >Description</H2
 ><P
-><TT
+><CODE
 CLASS="PARAMETER"
-><I
->lang</I
-></TT
-> is added to <TT
+>lang</CODE
+> is added to <CODE
 CLASS="PARAMETER"
-><I
->ls</I
-></TT
+>ls</CODE
 >.
-<TT
+<CODE
 CLASS="PARAMETER"
-><I
->lang</I
-></TT
+>lang</CODE
 > should be of the form Ll-Tt where Ll is a
 two or three letter language from ISO 639 and Tt is a territory from ISO
 3166.
@@ -163,12 +135,12 @@ two or three letter language from ISO 639 and Tt is a territory from ISO
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN2159"
+NAME="AEN2187"
 ></A
 ><H2
 >Version</H2
 ><P
->Fontconfig version 2.8.0
+>Fontconfig version 2.9.0
 
 	    </P
 ></DIV
@@ -190,14 +162,14 @@ VALIGN="top"
 ><A
 HREF="fclangsetcopy.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="t1.html"
+HREF="index.html"
 ACCESSKEY="H"
 >Home</A
 ></TD
@@ -206,9 +178,9 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="fclangsetcompare.html"
+HREF="fclangsetdel.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -222,7 +194,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="x102.html#AEN2066"
+HREF="x102.html#AEN2094"
 ACCESSKEY="U"
 >Up</A
 ></TD
@@ -230,7 +202,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->FcLangSetCompare</TD
+>FcLangSetDel</TD
 ></TR
 ></TABLE
 ></DIV
