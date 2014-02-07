@@ -10,22 +10,23 @@
 #         or http://www.debian.org/intl/l10n/po-debconf/README-trans#
 #    Developers do not need to manually edit POT or PO files.
 #
-# Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006.
-# Sergey Alyoshin, 2007
+# Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006, 2012.
+# Sergey Alyoshin, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: fontconfig_2.4.1-2\n"
+"Project-Id-Version: fontconfig 2.9.0-5\n"
 "Report-Msgid-Bugs-To: fontconfig@packages.debian.org\n"
-"POT-Creation-Date: 2009-12-31 13:48-0800\n"
-"PO-Revision-Date: 2007-04-17 11:50+0300\n"
-"Last-Translator: Sergey Alyoshin <alyoshin.s@gmail.com>\n"
+"POT-Creation-Date: 2012-04-30 10:00-0700\n"
+"PO-Revision-Date: 2012-05-29 21:07+0400\n"
+"Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. Type: select
 #. Choices
@@ -48,8 +49,9 @@ msgstr "Без подстройки"
 #. Type: select
 #. Description
 #: ../fontconfig-config.templates:2002
-msgid "Font tuning method for screen:"
-msgstr "Способ подстройки шрифтов на экране:"
+msgid "Font tuning method for screen (system default):"
+msgstr ""
+"Способ подстройки шрифтов для экрана (системная настройка по умолчанию):"
 
 #. Type: select
 #. Description
@@ -68,9 +70,9 @@ msgid ""
 "the Microsoft fonts. Select 'Autohinter' if you mostly use other TrueType "
 "fonts. Select 'None' if you want blurry text."
 msgstr ""
-"Выберите 'Native', если чаще всего используете шрифт DejaVu (используется по "
-"умолчанию в Debian) или любой из шрифтов Microsoft. Выберите 'Autohinter', "
-"если чаще всего используете шрифты TrueType. Выберите 'Без подстройки', если "
+"Выберите «Native», если чаще всего используете шрифт DejaVu (используется по "
+"умолчанию в Debian) или любой из шрифтов Microsoft. Выберите «Autohinter», "
+"если чаще всего используете шрифты TrueType. Выберите «Без подстройки», если "
 "хотите видеть текст нечётким."
 
 #. Type: select
@@ -107,7 +109,7 @@ msgid ""
 msgstr ""
 "Отрисовка на субпиксельном уровне обычно делает вид текста немного лучше на "
 "плоских (ЖК) мониторах, но на ЭЛТ мониторах могут появиться цветовые дефекты "
-"изображения. При выборе 'Автоматически' данная технология будет включена "
+"изображения. При выборе «Автоматически» данная технология будет включена "
 "только при обнаружении ЖК монитора."
 
 #. Type: boolean
@@ -135,7 +137,7 @@ msgid ""
 "the systemwide default; this and many other fontconfig options may be "
 "enabled or disabled on a per-user basis."
 msgstr ""
-"Контурные шрифты -- это шрифты, которые хорошо масштабируются до различных "
+"Контурные шрифты — это шрифты, которые хорошо масштабируются до различных "
 "размеров. В отличие от растровых шрифтов, которые часто ниже качеством. "
 "Включение этой опции повлияет на системные установки по умолчанию; эта и "
 "многие другие опции fontconfig могут быть включены или выключены отдельно "

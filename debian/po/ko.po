@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fontconfig\n"
 "Report-Msgid-Bugs-To: fontconfig@packages.debian.org\n"
-"POT-Creation-Date: 2009-12-31 13:48-0800\n"
+"POT-Creation-Date: 2012-04-30 10:00-0700\n"
 "PO-Revision-Date: 2007-05-15 10:32+0900\n"
 "Last-Translator: Sunjae Park <darehanl@gmail.com>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,7 +39,9 @@ msgstr "없음"
 #. Type: select
 #. Description
 #: ../fontconfig-config.templates:2002
-msgid "Font tuning method for screen:"
+#, fuzzy
+#| msgid "Font tuning method for screen:"
+msgid "Font tuning method for screen (system default):"
 msgstr "화면에 사용할 글꼴 튜닝 방식:"
 
 #. Type: select

@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fontconfig\n"
 "Report-Msgid-Bugs-To: fontconfig@packages.debian.org\n"
-"POT-Creation-Date: 2009-12-31 13:48-0800\n"
+"POT-Creation-Date: 2012-04-30 10:00-0700\n"
 "PO-Revision-Date: 2007-04-18 12:24+0200\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,7 +36,9 @@ msgstr "Ningún"
 #. Type: select
 #. Description
 #: ../fontconfig-config.templates:2002
-msgid "Font tuning method for screen:"
+#, fuzzy
+#| msgid "Font tuning method for screen:"
+msgid "Font tuning method for screen (system default):"
 msgstr "Método de axuste de tipos para a pantalla:"
 
 #. Type: select

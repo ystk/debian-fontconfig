@@ -15,10 +15,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fontconfig_2.4.2-1.2_de\n"
 "Report-Msgid-Bugs-To: fontconfig@packages.debian.org\n"
-"POT-Creation-Date: 2009-12-31 13:48-0800\n"
-"PO-Revision-Date: 2007-05-01 21:37+0200\n"
+"POT-Creation-Date: 2012-04-30 10:00-0700\n"
+"PO-Revision-Date: 2012-05-28 15:59+0200\n"
 "Last-Translator: Erik Schanze <eriks@debian.org>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -46,8 +47,8 @@ msgstr "Keine"
 #. Type: select
 #. Description
 #: ../fontconfig-config.templates:2002
-msgid "Font tuning method for screen:"
-msgstr "Schriftverbesserung für den Bildschirm:"
+msgid "Font tuning method for screen (system default):"
+msgstr "Schriftverbesserung für den Bildschirm (Systemvorgabe):"
 
 #. Type: select
 #. Description
@@ -66,8 +67,8 @@ msgid ""
 "the Microsoft fonts. Select 'Autohinter' if you mostly use other TrueType "
 "fonts. Select 'None' if you want blurry text."
 msgstr ""
-"Wählen Sie »Nativ« aus, wenn Sie überwiegend DejaVu (Standard in Debian) oder "
-"Microsoft-Schriftarten verwenden. Wählen Sie »Autohinter« aus, wenn sie "
+"Wählen Sie »Nativ« aus, wenn Sie überwiegend DejaVu (Standard in Debian) "
+"oder Microsoft-Schriftarten verwenden. Wählen Sie »Autohinter« aus, wenn sie "
 "überwiegend True-Type-Schriftarten verwenden. Wählen Sie »Keine« aus, wenn "
 "Sie verschwommenen Text wollen."
 

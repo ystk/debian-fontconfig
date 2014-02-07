@@ -11,7 +11,7 @@ Template: fontconfig/hinting_type
 Type: select
 __Choices: Native, Autohinter, None
 Default: Native
-_Description: Font tuning method for screen:
+_Description: Font tuning method for screen (system default):
  Please select the preferred method for tuning fonts for screen rendering.
  .
  Select 'Native' if you mostly use DejaVu (the default in Debian) or

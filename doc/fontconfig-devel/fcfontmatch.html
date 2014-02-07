@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -7,10 +7,10 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
-HREF="t1.html"><LINK
+HREF="index.html"><LINK
 REL="UP"
 TITLE="FcConfig"
-HREF="x102.html#AEN2554"><LINK
+HREF="x102.html#AEN2658"><LINK
 REL="PREVIOUS"
 TITLE="FcConfigSubstitute"
 HREF="fcconfigsubstitute.html"><LINK
@@ -46,7 +46,7 @@ VALIGN="bottom"
 ><A
 HREF="fcconfigsubstitute.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -60,7 +60,7 @@ VALIGN="bottom"
 ><A
 HREF="fcfontsort.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -75,7 +75,7 @@ NAME="FCFONTMATCH"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN3092"
+NAME="AEN3196"
 ></A
 ><H2
 >Name</H2
@@ -83,7 +83,7 @@ NAME="AEN3092"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN3095"
+NAME="AEN3199"
 ></A
 ><H2
 >Synopsis</H2
@@ -92,45 +92,18 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN3096"
+NAME="AEN3200"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="FUNCSYNOPSISINFO"
->#include &#60;fontconfig.h&#62;
+>#include &lt;fontconfig.h&gt;
 	</PRE
-></TD
-></TR
-></TABLE
 ><P
 ><CODE
 ><CODE
 CLASS="FUNCDEF"
->FcPattern * <TT
-CLASS="FUNCTION"
->FcFontMatch</TT
-></CODE
->(FcConfig *<TT
-CLASS="PARAMETER"
-><I
->config</I
-></TT
->, FcPattern *<TT
-CLASS="PARAMETER"
-><I
->p</I
-></TT
->, FcResult *<TT
-CLASS="PARAMETER"
-><I
->result</I
-></TT
->);</CODE
+>FcPattern * FcFontMatch</CODE
+>(FcConfig *config, FcPattern *p, FcResult *result);</CODE
 ></P
 ><P
 ></P
@@ -139,59 +112,51 @@ CLASS="PARAMETER"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN3107"
+NAME="AEN3211"
 ></A
 ><H2
 >Description</H2
 ><P
->Finds the font in <TT
+>Finds the font in <CODE
 CLASS="PARAMETER"
-><I
->sets</I
-></TT
+>sets</CODE
 > most closely matching
-<TT
+<CODE
 CLASS="PARAMETER"
-><I
->pattern</I
-></TT
+>pattern</CODE
 > and returns the result of
-<TT
+<CODE
 CLASS="FUNCTION"
->FcFontRenderPrepare</TT
+>FcFontRenderPrepare</CODE
 > for that font and the provided
 pattern. This function should be called only after
-<TT
+<CODE
 CLASS="FUNCTION"
->FcConfigSubstitute</TT
+>FcConfigSubstitute</CODE
 > and
-<TT
+<CODE
 CLASS="FUNCTION"
->FcDefaultSubstitute</TT
+>FcDefaultSubstitute</CODE
 > have been called for
-<TT
+<CODE
 CLASS="PARAMETER"
-><I
->p</I
-></TT
+>p</CODE
 >; otherwise the results will not be correct.
-If <TT
+If <CODE
 CLASS="PARAMETER"
-><I
->config</I
-></TT
+>config</CODE
 > is NULL, the current configuration is used.
 	    </P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN3117"
+NAME="AEN3221"
 ></A
 ><H2
 >Version</H2
 ><P
->Fontconfig version 2.8.0
+>Fontconfig version 2.9.0
 
 	    </P
 ></DIV
@@ -213,14 +178,14 @@ VALIGN="top"
 ><A
 HREF="fcconfigsubstitute.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="t1.html"
+HREF="index.html"
 ACCESSKEY="H"
 >Home</A
 ></TD
@@ -231,7 +196,7 @@ VALIGN="top"
 ><A
 HREF="fcfontsort.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -245,7 +210,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="x102.html#AEN2554"
+HREF="x102.html#AEN2658"
 ACCESSKEY="U"
 >Up</A
 ></TD

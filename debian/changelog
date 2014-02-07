@@ -1,3 +1,86 @@
+fontconfig (2.9.0-7.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Update README.Debian with respect to enabling bitmapped fonts: just
+    removing the no-bitmaps.conf symlink is not enough, the corresponding
+    symlink for yes-bitmaps.conf needs to be added too.
+    Thanks to Andreas Metzler <ametzler@debian.org> for the patch.
+    Closes: #684923.
+
+ -- intrigeri <intrigeri@debian.org>  Tue, 11 Dec 2012 15:09:54 +0100
+
+fontconfig (2.9.0-7) unstable; urgency=low
+
+  * Don't clean ancient cache files on new install. Closes: #636173.
+  * Update Czech translation. Closes: #681700.
+  * Update Spanish translation. Closes: #681766.
+  * Add Polish translation. Closes: #682577.
+
+ -- Keith Packard <keithp@debian.org>  Wed, 25 Jul 2012 08:46:48 -0700
+
+fontconfig (2.9.0-6) unstable; urgency=low
+
+  * Update SV translation. Closes: #673886.
+  * Update DA translation. Closes: #674466.
+  * Update RU translation: Closes: #675067.
+  * Update DE translation. Closes: #675075.
+  * Update PT translation. Closes: #674947.
+
+ -- Keith Packard <keithp@debian.org>  Thu, 31 May 2012 14:04:07 -0700
+
+fontconfig (2.9.0-5) unstable; urgency=low
+
+  * Identical to 2.9.0-4, but for unstable
+
+ -- Keith Packard <keithp@debian.org>  Mon, 14 May 2012 00:08:11 -0700
+
+fontconfig (2.9.0-4) experimental; urgency=low
+
+  * Update NL translation. Closes: #671300.
+  * Update FR translation. Closes: #671858.
+  * Remove /var/lib/defoma/fontconfig.d/id-cache. Closes: #672252, #670982.
+
+ -- Keith Packard <keithp@debian.org>  Wed, 09 May 2012 09:22:25 -0700
+
+fontconfig (2.9.0-3) unstable; urgency=low
+
+  * Apply upstream fix for FTBFS on m68k. Closes: #671072.
+  * Update .po files after hinting configuration message changed.
+
+ -- Keith Packard <keithp@debian.org>  Wed, 02 May 2012 09:07:09 -0700
+
+fontconfig (2.9.0-2) unstable; urgency=low
+
+  * Defoma version no longer relevant.
+    Closes: #565891, #583709, #643127, #652486
+  * Hinting type is only system default. Closes: #283256
+
+ -- Keith Packard <keithp@debian.org>  Mon, 30 Apr 2012 09:49:40 -0700
+
+fontconfig (2.9.0-1) experimental; urgency=low
+
+  * New upstream version
+  * Remove defoma support. Closes: #651493.
+
+ -- Keith Packard <keithp@debian.org>  Mon, 16 Apr 2012 13:46:56 -0700
+
+fontconfig (2.8.0-3) unstable; urgency=low
+
+  * Multi-Arch support
+  * Mark fontconfig, fontconfig-config 'Multi-Arch: foreign'.
+     Patch from Steve Langasek <steve.langasek@canonical.com>. Closes: #614208
+
+ -- Keith Packard <keithp@debian.org>  Mon, 27 Jun 2011 10:55:26 -0700
+
+fontconfig (2.8.0-2.2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix pending l10n issues. Debconf translations:
+    - Danish (Joe Hansen).  Closes: #592795
+    - Turkish (Gürkan Aslan).  Closes: #620073
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 07 Apr 2011 19:50:12 +0200
+
 fontconfig (2.8.0-2.1) unstable; urgency=low
 
   * Non-maintainer upload.

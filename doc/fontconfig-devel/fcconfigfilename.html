@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -7,10 +7,10 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
-HREF="t1.html"><LINK
+HREF="index.html"><LINK
 REL="UP"
 TITLE="FcConfig"
-HREF="x102.html#AEN2554"><LINK
+HREF="x102.html#AEN2658"><LINK
 REL="PREVIOUS"
 TITLE="FcFontList"
 HREF="fcfontlist.html"><LINK
@@ -46,7 +46,7 @@ VALIGN="bottom"
 ><A
 HREF="fcfontlist.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -60,7 +60,7 @@ VALIGN="bottom"
 ><A
 HREF="fcconfigparseandload.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -75,7 +75,7 @@ NAME="FCCONFIGFILENAME"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN3222"
+NAME="AEN3326"
 ></A
 ><H2
 >Name</H2
@@ -83,7 +83,7 @@ NAME="AEN3222"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN3225"
+NAME="AEN3329"
 ></A
 ><H2
 >Synopsis</H2
@@ -92,35 +92,18 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN3226"
+NAME="AEN3330"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="FUNCSYNOPSISINFO"
->#include &#60;fontconfig.h&#62;
+>#include &lt;fontconfig.h&gt;
 	</PRE
-></TD
-></TR
-></TABLE
 ><P
 ><CODE
 ><CODE
 CLASS="FUNCDEF"
->FcChar8 * <TT
-CLASS="FUNCTION"
->FcConfigFilename</TT
-></CODE
->(const FcChar8 *<TT
-CLASS="PARAMETER"
-><I
->name</I
-></TT
->);</CODE
+>FcChar8 * FcConfigFilename</CODE
+>(const FcChar8 *name);</CODE
 ></P
 ><P
 ></P
@@ -129,7 +112,7 @@ CLASS="PARAMETER"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN3233"
+NAME="AEN3337"
 ></A
 ><H2
 >Description</H2
@@ -139,18 +122,14 @@ This provides applications a way to convert various configuration file
 references into filename form.
     </P
 ><P
->A null or empty <TT
+>A null or empty <CODE
 CLASS="PARAMETER"
-><I
->name</I
-></TT
+>name</CODE
 > indicates that the default configuration file should
 be used; which file this references can be overridden with the
-FC_CONFIG_FILE environment variable.  Next, if the name starts with <TT
+FC_CONFIG_FILE environment variable.  Next, if the name starts with <CODE
 CLASS="PARAMETER"
-><I
->~</I
-></TT
+>~</CODE
 >, it
 refers to a file in the current users home directory.  Otherwise if the name
 doesn't start with '/', it refers to a file in the default configuration
@@ -161,12 +140,12 @@ FC_CONFIG_DIR environment variable.
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN3239"
+NAME="AEN3343"
 ></A
 ><H2
 >Version</H2
 ><P
->Fontconfig version 2.8.0
+>Fontconfig version 2.9.0
 
 	    </P
 ></DIV
@@ -188,14 +167,14 @@ VALIGN="top"
 ><A
 HREF="fcfontlist.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="t1.html"
+HREF="index.html"
 ACCESSKEY="H"
 >Home</A
 ></TD
@@ -206,7 +185,7 @@ VALIGN="top"
 ><A
 HREF="fcconfigparseandload.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -220,7 +199,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="x102.html#AEN2554"
+HREF="x102.html#AEN2658"
 ACCESSKEY="U"
 >Up</A
 ></TD

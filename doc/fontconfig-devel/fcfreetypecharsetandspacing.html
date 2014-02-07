@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -7,10 +7,10 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
-HREF="t1.html"><LINK
+HREF="index.html"><LINK
 REL="UP"
 TITLE="FreeType specific functions"
-HREF="x102.html#AEN1389"><LINK
+HREF="x102.html#AEN1393"><LINK
 REL="PREVIOUS"
 TITLE="FcFreeTypeCharSet"
 HREF="fcfreetypecharset.html"><LINK
@@ -46,7 +46,7 @@ VALIGN="bottom"
 ><A
 HREF="fcfreetypecharset.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -60,7 +60,7 @@ VALIGN="bottom"
 ><A
 HREF="fcfreetypequery.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -75,15 +75,15 @@ NAME="FCFREETYPECHARSETANDSPACING"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN1442"
+NAME="AEN1446"
 ></A
 ><H2
 >Name</H2
->FcFreeTypeCharSetAndSpacing&nbsp;--&nbsp;compute unicode coverage and spacing type</DIV
+>FcFreeTypeCharSetAndSpacing&nbsp;--&nbsp;compute Unicode coverage and spacing type</DIV
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN1445"
+NAME="AEN1449"
 ></A
 ><H2
 >Synopsis</H2
@@ -92,46 +92,19 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN1446"
+NAME="AEN1450"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="FUNCSYNOPSISINFO"
->#include &#60;fontconfig.h&#62;
-#include &#60;fcfreetype.h&#62;
+>#include &lt;fontconfig.h&gt;
+#include &lt;fcfreetype.h&gt;
 	</PRE
-></TD
-></TR
-></TABLE
 ><P
 ><CODE
 ><CODE
 CLASS="FUNCDEF"
->FcCharSet * <TT
-CLASS="FUNCTION"
->FcFreeTypeCharSetAndSpacing</TT
-></CODE
->(FT_Face <TT
-CLASS="PARAMETER"
-><I
->face</I
-></TT
->, FcBlanks *<TT
-CLASS="PARAMETER"
-><I
->blanks</I
-></TT
->, int *<TT
-CLASS="PARAMETER"
-><I
->spacing</I
-></TT
->);</CODE
+>FcCharSet * FcFreeTypeCharSetAndSpacing</CODE
+>(FT_Face face, FcBlanks *blanks, int *spacing);</CODE
 ></P
 ><P
 ></P
@@ -140,7 +113,7 @@ CLASS="PARAMETER"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN1457"
+NAME="AEN1461"
 ></A
 ><H2
 >Description</H2
@@ -150,11 +123,9 @@ This scans
 several encoding tables to build as complete a list as possible.  
 If 'blanks' is not 0, the glyphs in the font are examined and any blank glyphs
 not in 'blanks' are not placed in the returned FcCharSet.
-<TT
+<CODE
 CLASS="PARAMETER"
-><I
->spacing</I
-></TT
+>spacing</CODE
 > receives the computed spacing type of the
 font, one of FC_MONO for a font where all glyphs have the same width,
 FC_DUAL, where the font has glyphs in precisely two widths, one twice as
@@ -165,12 +136,12 @@ widths.
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN1461"
+NAME="AEN1465"
 ></A
 ><H2
 >Version</H2
 ><P
->Fontconfig version 2.8.0
+>Fontconfig version 2.9.0
 
 	    </P
 ></DIV
@@ -192,14 +163,14 @@ VALIGN="top"
 ><A
 HREF="fcfreetypecharset.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="t1.html"
+HREF="index.html"
 ACCESSKEY="H"
 >Home</A
 ></TD
@@ -210,7 +181,7 @@ VALIGN="top"
 ><A
 HREF="fcfreetypequery.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -224,7 +195,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="x102.html#AEN1389"
+HREF="x102.html#AEN1393"
 ACCESSKEY="U"
 >Up</A
 ></TD

@@ -3,15 +3,15 @@ Section: fonts
 Priority: optional
 Maintainer: Keith Packard <keithp@debian.org>
 Uploaders: Josselin Mouette <joss@debian.org>
-Build-Depends: cdbs (>= 0.4.5.4), debhelper (>= 7), libfreetype6-dev (>= 2.1.7), libexpat1-dev, defoma (>= 0.7.0), binutils (>= 2.12.90.0.9), po-debconf
-Standards-Version: 3.8.3
+Build-Depends: cdbs (>= 0.4.93), debhelper (>= 9), libfreetype6-dev (>= 2.1.7), libexpat1-dev, binutils (>= 2.12.90.0.9), po-debconf
+Standards-Version: 3.9.3
 
 Package: fontconfig
 Section: fonts
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, fontconfig-config
 Replaces: fontconfig-config (<< 2.5.93-1)
-Suggests: defoma (>= 0.7.0)
+Multi-Arch: foreign
 Description: generic font configuration library - support binaries
  Fontconfig is a font configuration and customization library, which
  does not depend on the X Window System. It is designed to locate
@@ -26,7 +26,7 @@ Description: generic font configuration library - support binaries
  This package contains a program to maintain the fontconfig cache
  (fc-cache), a sample program to list installed fonts (fc-list), a program
  to test the matching rules (fc-match) and a program to dump the binary
- cache files in string form (fc-cat). It also makes fonts managed by defoma
+ cache files in string form (fc-cat). It no longer makes fonts managed by defoma
  available to fontconfig applications.
 
 Package: fontconfig-config
@@ -35,6 +35,7 @@ Architecture: all
 Depends: ${misc:Depends}, ucf (>= 0.29), ttf-dejavu-core | ttf-bitstream-vera | ttf-freefont | gsfonts-x11
 Replaces: fontconfig (<< 2.3.2-2)
 Conflicts: fontconfig (<< 2.3.2-2)
+Multi-Arch: foreign
 Description: generic font configuration library - configuration
  Fontconfig is a font configuration and customization library, which
  does not depend on the X Window System. It is designed to locate
@@ -75,6 +76,8 @@ Description: generic font configuration library - development
 Package: libfontconfig1
 Section: libs
 Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}, fontconfig-config (= ${source:Version})
 Provides: libfontconfig
 Description: generic font configuration library - runtime

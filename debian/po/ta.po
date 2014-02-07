@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: font-config\n"
 "Report-Msgid-Bugs-To: fontconfig@packages.debian.org\n"
-"POT-Creation-Date: 2009-12-31 13:48-0800\n"
+"POT-Creation-Date: 2012-04-30 10:00-0700\n"
 "PO-Revision-Date: 2007-04-17 14:38+0530\n"
 "Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
 "Language-Team: TAMIL <ubuntu-l10n-tam@lists.ubuntu.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,7 +38,9 @@ msgstr "ஒன்றுமில்லை"
 #. Type: select
 #. Description
 #: ../fontconfig-config.templates:2002
-msgid "Font tuning method for screen:"
+#, fuzzy
+#| msgid "Font tuning method for screen:"
+msgid "Font tuning method for screen (system default):"
 msgstr "திரைக்கு எழுத்துரு நுண் அமைப்பு:"
 
 #. Type: select

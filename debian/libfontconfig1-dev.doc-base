@@ -13,5 +13,5 @@ Format: Text
 Files: /usr/share/doc/libfontconfig1-dev/fontconfig-devel.txt.gz
 
 Format: HTML
-Index: /usr/share/doc/libfontconfig1-dev/fontconfig-devel/t1.html
+Index: /usr/share/doc/libfontconfig1-dev/fontconfig-devel/index.html
 Files: /usr/share/doc/libfontconfig1-dev/fontconfig-devel/*.html

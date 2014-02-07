@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -7,10 +7,10 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
-HREF="t1.html"><LINK
+HREF="index.html"><LINK
 REL="UP"
 TITLE="FcMatrix"
-HREF="x102.html#AEN2360"><LINK
+HREF="x102.html#AEN2464"><LINK
 REL="PREVIOUS"
 TITLE="FcMatrixMultiply"
 HREF="fcmatrixmultiply.html"><LINK
@@ -46,7 +46,7 @@ VALIGN="bottom"
 ><A
 HREF="fcmatrixmultiply.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -60,7 +60,7 @@ VALIGN="bottom"
 ><A
 HREF="fcmatrixscale.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -75,7 +75,7 @@ NAME="FCMATRIXROTATE"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN2468"
+NAME="AEN2572"
 ></A
 ><H2
 >Name</H2
@@ -83,7 +83,7 @@ NAME="AEN2468"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN2471"
+NAME="AEN2575"
 ></A
 ><H2
 >Synopsis</H2
@@ -92,45 +92,18 @@ CLASS="FUNCSYNOPSIS"
 ><P
 ></P
 ><A
-NAME="AEN2472"
+NAME="AEN2576"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="FUNCSYNOPSISINFO"
->#include &#60;fontconfig.h&#62;
+>#include &lt;fontconfig.h&gt;
 	</PRE
-></TD
-></TR
-></TABLE
 ><P
 ><CODE
 ><CODE
 CLASS="FUNCDEF"
->void <TT
-CLASS="FUNCTION"
->FcMatrixRotate</TT
-></CODE
->(FcMatrix *<TT
-CLASS="PARAMETER"
-><I
->matrix</I
-></TT
->, double <TT
-CLASS="PARAMETER"
-><I
->cos</I
-></TT
->, double <TT
-CLASS="PARAMETER"
-><I
->sin</I
-></TT
->);</CODE
+>void FcMatrixRotate</CODE
+>(FcMatrix *matrix, double cos, double sin);</CODE
 ></P
 ><P
 ></P
@@ -139,58 +112,43 @@ CLASS="PARAMETER"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN2483"
+NAME="AEN2587"
 ></A
 ><H2
 >Description</H2
 ><P
-><TT
+><CODE
 CLASS="FUNCTION"
->FcMatrixRotate</TT
-> rotates <TT
+>FcMatrixRotate</CODE
+> rotates <CODE
 CLASS="PARAMETER"
-><I
->matrix</I
-></TT
+>matrix</CODE
 >
-by the angle who's sine is <TT
+by the angle who's sine is <CODE
 CLASS="PARAMETER"
-><I
->sin</I
-></TT
+>sin</CODE
 > and cosine is
-<TT
+<CODE
 CLASS="PARAMETER"
-><I
->cos</I
-></TT
+>cos</CODE
 >.  This is done by multiplying by the
 matrix:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="PROGRAMLISTING"
 >  cos -sin
   sin  cos</PRE
-></TD
-></TR
-></TABLE
 >
 	    </P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN2491"
+NAME="AEN2595"
 ></A
 ><H2
 >Version</H2
 ><P
->Fontconfig version 2.8.0
+>Fontconfig version 2.9.0
 
 	    </P
 ></DIV
@@ -212,14 +170,14 @@ VALIGN="top"
 ><A
 HREF="fcmatrixmultiply.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="t1.html"
+HREF="index.html"
 ACCESSKEY="H"
 >Home</A
 ></TD
@@ -230,7 +188,7 @@ VALIGN="top"
 ><A
 HREF="fcmatrixscale.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -244,7 +202,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="x102.html#AEN2360"
+HREF="x102.html#AEN2464"
 ACCESSKEY="U"
 >Up</A
 ></TD
