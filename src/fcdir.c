@@ -35,6 +35,30 @@ FcFileIsDir (const FcChar8 *file)
     return S_ISDIR(statb.st_mode);
 }
 
+FcBool
+FcFileIsLink (const FcChar8 *file)
+{
+#if HAVE_LSTAT
+    struct stat statb;
+
+    if (lstat ((const char *)file, &statb) != 0)
+	return FcFalse;
+    return S_ISLNK (statb.st_mode);
+#else
+    return FcFalse;
+#endif
+}
+
+FcBool
+FcFileIsFile (const FcChar8 *file)
+{
+    struct stat statb;
+
+    if (FcStat (file, &statb) != 0)
+	return FcFalse;
+    return S_ISREG (statb.st_mode);
+}
+
 static FcBool
 FcFileScanFontConfig (FcFontSet		*set,
 		      FcBlanks		*blanks,
@@ -112,10 +136,10 @@ FcFileScanConfig (FcFontSet	*set,
 FcBool
 FcFileScan (FcFontSet	    *set,
 	    FcStrSet	    *dirs,
-	    FcFileCache	    *cache, /* XXX unused */
+	    FcFileCache	    *cache FC_UNUSED,
 	    FcBlanks	    *blanks,
 	    const FcChar8   *file,
-	    FcBool	    force)
+	    FcBool	    force FC_UNUSED)
 {
     return FcFileScanConfig (set, dirs, blanks, file, FcConfigGetCurrent ());
 }
@@ -211,6 +235,9 @@ bail2:
 bail1:
     closedir (d);
 bail:
+    if (file)
+	free (file);
+
     return ret;
 }
 
@@ -242,7 +269,7 @@ FcDirCacheScan (const FcChar8 *dir, FcConfig *config)
     if (FcDebug () & FC_DBG_FONTSET)
 	printf ("cache scan dir %s\n", dir);
 
-    if (FcStat (dir, &dir_stat) < 0)
+    if (FcStatChecksum (dir, &dir_stat) < 0)
 	goto bail;
 
     set = FcFontSetCreate();
@@ -299,7 +326,7 @@ FcDirCacheRead (const FcChar8 *dir, FcBool force, FcConfig *config)
 }
 
 FcBool
-FcDirSave (FcFontSet *set, FcStrSet * dirs, const FcChar8 *dir)
+FcDirSave (FcFontSet *set FC_UNUSED, FcStrSet * dirs FC_UNUSED, const FcChar8 *dir FC_UNUSED)
 {
     return FcFalse; /* XXX deprecated */
 }
