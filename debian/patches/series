@@ -1,1 +1,5 @@
-architecture-with-small-double-align
+01_path_max.patch
+02_indic_names.patch
+03_locale_c.utf8.patch
+04_mgopen_fonts.patch
+05_doc_files.patch

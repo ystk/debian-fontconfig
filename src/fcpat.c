@@ -22,12 +22,8 @@
 
 #include "fcint.h"
 #include "fcftint.h"
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
 
-static FcBool
-FcHashOwnsName(const FcChar8 *name);
+/* Objects MT-safe for readonly access. */
 
 FcPattern *
 FcPatternCreate (void)
@@ -37,21 +33,19 @@ FcPatternCreate (void)
     p = (FcPattern *) malloc (sizeof (FcPattern));
     if (!p)
 	return 0;
-    FcMemAlloc (FC_MEM_PATTERN, sizeof (FcPattern));
     p->num = 0;
     p->size = 0;
     p->elts_offset = FcPtrToOffset (p, NULL);
-    p->ref = 1;
+    FcRefInit (&p->ref, 1);
     return p;
 }
 
 void
 FcValueDestroy (FcValue v)
 {
-    switch (v.type) {
+    switch ((int) v.type) {
     case FcTypeString:
-        if (!FcHashOwnsName(v.u.s))
-            FcStrFree ((FcChar8 *) v.u.s);
+	FcFree (v.u.s);
 	break;
     case FcTypeMatrix:
 	FcMatrixFree ((FcMatrix *) v.u.m);
@@ -72,7 +66,7 @@ FcValueCanonicalize (const FcValue *v)
 {
     FcValue new;
 
-    switch (v->type)
+    switch ((int) v->type)
     {
     case FcTypeString:
 	new.u.s = FcValueString(v);
@@ -96,9 +90,9 @@ FcValueCanonicalize (const FcValue *v)
 FcValue
 FcValueSave (FcValue v)
 {
-    switch (v.type) {
+    switch ((int) v.type) {
     case FcTypeString:
-	v.u.s = FcStrStaticName (v.u.s);
+	v.u.s = FcStrdup (v.u.s);
 	if (!v.u.s)
 	    v.type = FcTypeVoid;
 	break;
@@ -123,16 +117,21 @@ FcValueSave (FcValue v)
     return v;
 }
 
+FcValueListPtr
+FcValueListCreate (void)
+{
+    return calloc (1, sizeof (FcValueList));
+}
+
 void
 FcValueListDestroy (FcValueListPtr l)
 {
     FcValueListPtr next;
     for (; l; l = next)
     {
-	switch (l->value.type) {
+	switch ((int) l->value.type) {
 	case FcTypeString:
-            if (!FcHashOwnsName((FcChar8 *)l->value.u.s))
-                FcStrFree ((FcChar8 *)l->value.u.s);
+	    FcFree (l->value.u.s);
 	    break;
 	case FcTypeMatrix:
 	    FcMatrixFree ((FcMatrix *)l->value.u.m);
@@ -149,9 +148,83 @@ FcValueListDestroy (FcValueListPtr l)
 	    break;
 	}
 	next = FcValueListNext(l);
-	FcMemFree (FC_MEM_VALLIST, sizeof (FcValueList));
 	free(l);
     }
+}
+
+FcValueListPtr
+FcValueListPrepend (FcValueListPtr vallist,
+		    FcValue        value,
+		    FcValueBinding binding)
+{
+    FcValueListPtr new;
+
+    if (value.type == FcTypeVoid)
+	return vallist;
+    new = FcValueListCreate ();
+    if (!new)
+	return vallist;
+
+    new->value = FcValueSave (value);
+    new->binding = binding;
+    new->next = vallist;
+
+    return new;
+}
+
+FcValueListPtr
+FcValueListAppend (FcValueListPtr vallist,
+		   FcValue        value,
+		   FcValueBinding binding)
+{
+    FcValueListPtr new, last;
+
+    if (value.type == FcTypeVoid)
+	return vallist;
+    new = FcValueListCreate ();
+    if (!new)
+	return vallist;
+
+    new->value = FcValueSave (value);
+    new->binding = binding;
+    new->next = NULL;
+
+    if (vallist)
+    {
+	for (last = vallist; FcValueListNext (last); last = FcValueListNext (last));
+
+	last->next = new;
+    }
+    else
+	vallist = new;
+
+    return vallist;
+}
+
+FcValueListPtr
+FcValueListDuplicate(FcValueListPtr orig)
+{
+    FcValueListPtr new = NULL, l, t = NULL;
+    FcValue v;
+
+    for (l = orig; l != NULL; l = FcValueListNext (l))
+    {
+	if (!new)
+	{
+	    t = new = FcValueListCreate();
+	}
+	else
+	{
+	    t->next = FcValueListCreate();
+	    t = FcValueListNext (t);
+	}
+	v = FcValueCanonicalize (&l->value);
+	t->value = FcValueSave (v);
+	t->binding = l->binding;
+	t->next = NULL;
+    }
+
+    return new;
 }
 
 FcBool
@@ -173,6 +246,8 @@ FcValueEqual (FcValue va, FcValue vb)
 	    return FcFalse;
     }
     switch (va.type) {
+    case FcTypeUnknown:
+	return FcFalse;	/* don't know how to compare this object */
     case FcTypeVoid:
 	return FcTrue;
     case FcTypeInteger:
@@ -221,6 +296,7 @@ static FcChar32
 FcValueHash (const FcValue *v)
 {
     switch (v->type) {
+    case FcTypeUnknown:
     case FcTypeVoid:
 	return 0;
     case FcTypeInteger:
@@ -244,7 +320,7 @@ FcValueHash (const FcValue *v)
     case FcTypeLangSet:
 	return FcLangSetHash (FcValueLangSet(v));
     }
-    return FcFalse;
+    return 0;
 }
 
 static FcBool
@@ -283,22 +359,23 @@ FcPatternDestroy (FcPattern *p)
     int		    i;
     FcPatternElt    *elts;
 
-    if (p->ref == FC_REF_CONSTANT)
+    if (!p)
+	return;
+
+    if (FcRefIsConst (&p->ref))
     {
 	FcCacheObjectDereference (p);
 	return;
     }
 	
-    if (--p->ref > 0)
+    if (FcRefDec (&p->ref) != 1)
 	return;
 
     elts = FcPatternElts (p);
     for (i = 0; i < p->num; i++)
 	FcValueListDestroy (FcPatternEltValues(&elts[i]));
 
-    FcMemFree (FC_MEM_PATELT, p->size * sizeof (FcPatternElt));
     free (elts);
-    FcMemFree (FC_MEM_PATTERN, sizeof (FcPattern));
     free (p);
 }
 
@@ -368,9 +445,6 @@ FcPatternObjectInsertElt (FcPattern *p, FcObject object)
 	    if (!e)
 		return FcFalse;
 	    p->elts_offset = FcPtrToOffset (p, e);
-	    if (p->size)
-		FcMemFree (FC_MEM_PATELT, p->size * sizeof (FcPatternElt));
-	    FcMemAlloc (FC_MEM_PATELT, s * sizeof (FcPatternElt));
 	    while (p->size < s)
 	    {
 		e[p->size].object = 0;
@@ -464,6 +538,57 @@ FcPatternEqualSubset (const FcPattern *pai, const FcPattern *pbi, const FcObject
 }
 
 FcBool
+FcPatternObjectListAdd (FcPattern	*p,
+			FcObject	object,
+			FcValueListPtr	list,
+			FcBool		append)
+{
+    FcPatternElt   *e;
+    FcValueListPtr l, *prev;
+
+    if (FcRefIsConst (&p->ref))
+	goto bail0;
+
+    /*
+     * Make sure the stored type is valid for built-in objects
+     */
+    for (l = list; l != NULL; l = FcValueListNext (l))
+    {
+	if (!FcObjectValidType (object, l->value.type))
+	{
+	    fprintf (stderr,
+		     "Fontconfig warning: FcPattern object %s does not accept value", FcObjectName (object));
+	    FcValuePrintFile (stderr, l->value);
+	    fprintf (stderr, "\n");
+	    goto bail0;
+	}
+    }
+
+    e = FcPatternObjectInsertElt (p, object);
+    if (!e)
+	goto bail0;
+
+    if (append)
+    {
+	for (prev = &e->values; *prev; prev = &(*prev)->next)
+	    ;
+	*prev = list;
+    }
+    else
+    {
+	for (prev = &list; *prev; prev = &(*prev)->next)
+	    ;
+	*prev = e->values;
+	e->values = list;
+    }
+
+    return FcTrue;
+
+bail0:
+    return FcFalse;
+}
+
+FcBool
 FcPatternObjectAddWithBinding  (FcPattern	*p,
 				FcObject	object,
 				FcValue		value,
@@ -473,15 +598,13 @@ FcPatternObjectAddWithBinding  (FcPattern	*p,
     FcPatternElt   *e;
     FcValueListPtr new, *prev;
 
-    if (p->ref == FC_REF_CONSTANT)
+    if (FcRefIsConst (&p->ref))
 	goto bail0;
 
-    new = malloc (sizeof (FcValueList));
+    new = FcValueListCreate ();
     if (!new)
 	goto bail0;
 
-    memset(new, 0, sizeof (FcValueList));
-    FcMemAlloc (FC_MEM_VALLIST, sizeof (FcValueList));
     value = FcValueSave (value);
     if (value.type == FcTypeVoid)
 	goto bail1;
@@ -491,12 +614,11 @@ FcPatternObjectAddWithBinding  (FcPattern	*p,
      */
     if (!FcObjectValidType (object, value.type))
     {
-	if (FcDebug() & FC_DBG_OBJTYPES)
-	{
-	    printf ("FcPattern object %s does not accept value ",
-		    FcObjectName (object));
-	    FcValuePrint (value);
-	}
+	fprintf (stderr,
+		 "Fontconfig warning: FcPattern object %s does not accept value",
+		 FcObjectName (object));
+	FcValuePrintFile (stderr, value);
+	fprintf (stderr, "\n");
 	goto bail1;
     }
 
@@ -525,7 +647,6 @@ FcPatternObjectAddWithBinding  (FcPattern	*p,
 bail2:
     FcValueDestroy (value);
 bail1:
-    FcMemFree (FC_MEM_VALLIST, sizeof (FcValueList));
     free (new);
 bail0:
     return FcFalse;
@@ -652,7 +773,7 @@ FcPatternObjectAddString (FcPattern *p, FcObject object, const FcChar8 *s)
     }
 
     v.type = FcTypeString;
-    v.u.s = FcStrStaticName(s);
+    v.u.s = s;
     return FcPatternObjectAdd (p, object, v, FcTrue);
 }
 
@@ -725,6 +846,8 @@ FcPatternObjectGet (const FcPattern *p, FcObject object, int id, FcValue *v)
     FcPatternElt   *e;
     FcValueListPtr l;
 
+    if (!p)
+	return FcResultNoMatch;
     e = FcPatternObjectFindElt (p, object);
     if (!e)
 	return FcResultNoMatch;
@@ -755,7 +878,7 @@ FcPatternObjectGetInteger (const FcPattern *p, FcObject object, int id, int *i)
     r = FcPatternObjectGet (p, object, id, &v);
     if (r != FcResultMatch)
 	return r;
-    switch (v.type) {
+    switch ((int) v.type) {
     case FcTypeDouble:
 	*i = (int) v.u.d;
 	break;
@@ -784,7 +907,7 @@ FcPatternObjectGetDouble (const FcPattern *p, FcObject object, int id, double *d
     r = FcPatternObjectGet (p, object, id, &v);
     if (r != FcResultMatch)
 	return r;
-    switch (v.type) {
+    switch ((int) v.type) {
     case FcTypeDouble:
 	*d = v.u.d;
 	break;
@@ -939,8 +1062,8 @@ bail0:
 void
 FcPatternReference (FcPattern *p)
 {
-    if (p->ref != FC_REF_CONSTANT)
-	p->ref++;
+    if (!FcRefIsConst (&p->ref))
+	FcRefInc (&p->ref);
     else
 	FcCacheObjectReference (p);
 }
@@ -1026,80 +1149,6 @@ bail0:
     return NULL;
 }
 
-#define OBJECT_HASH_SIZE    31
-static struct objectBucket {
-    struct objectBucket	*next;
-    FcChar32		hash;
-} *FcObjectBuckets[OBJECT_HASH_SIZE];
-
-static FcBool
-FcHashOwnsName (const FcChar8 *name)
-{
-    FcChar32		hash = FcStringHash (name);
-    struct objectBucket	**p;
-    struct objectBucket	*b;
-
-    for (p = &FcObjectBuckets[hash % OBJECT_HASH_SIZE]; (b = *p); p = &(b->next))
-	if (b->hash == hash && ((char *)name == (char *) (b + 1)))
-            return FcTrue;
-    return FcFalse;
-}
-
-const FcChar8 *
-FcStrStaticName (const FcChar8 *name)
-{
-    FcChar32		hash = FcStringHash (name);
-    struct objectBucket	**p;
-    struct objectBucket	*b;
-    int			size;
-
-    for (p = &FcObjectBuckets[hash % OBJECT_HASH_SIZE]; (b = *p); p = &(b->next))
-	if (b->hash == hash && !strcmp ((char *)name, (char *) (b + 1)))
-	    return (FcChar8 *) (b + 1);
-    size = sizeof (struct objectBucket) + strlen ((char *)name) + 1;
-    /*
-     * workaround valgrind warning because glibc takes advantage of how it knows memory is
-     * allocated to implement strlen by reading in groups of 4
-     */
-    size = (size + 3) & ~3;
-    b = malloc (size);
-    FcMemAlloc (FC_MEM_STATICSTR, size);
-    if (!b)
-        return NULL;
-    b->next = 0;
-    b->hash = hash;
-    strcpy ((char *) (b + 1), (char *)name);
-    *p = b;
-    return (FcChar8 *) (b + 1);
-}
-
-static void
-FcStrStaticNameFini (void)
-{
-    int i, size;
-    struct objectBucket *b, *next;
-    char *name;
-
-    for (i = 0; i < OBJECT_HASH_SIZE; i++)
-    {
-	for (b = FcObjectBuckets[i]; b; b = next)
-	{
-	    next = b->next;
-	    name = (char *) (b + 1);
-	    size = sizeof (struct objectBucket) + strlen (name) + 1;
-	    FcMemFree (FC_MEM_STATICSTR, size + sizeof (int));
-	    free (b);
-	}
-	FcObjectBuckets[i] = 0;
-    }
-}
-
-void
-FcPatternFini (void)
-{
-    FcStrStaticNameFini ();
-    FcObjectFini ();
-}
 
 FcBool
 FcPatternSerializeAlloc (FcSerialize *serialize, const FcPattern *pat)
@@ -1131,7 +1180,7 @@ FcPatternSerialize (FcSerialize *serialize, const FcPattern *pat)
 	return NULL;
     *pat_serialized = *pat;
     pat_serialized->size = pat->num;
-    pat_serialized->ref = FC_REF_CONSTANT;
+    FcRefSetConst (&pat_serialized->ref);
 
     elts_serialized = FcSerializePtr (serialize, elts);
     if (!elts_serialized)
@@ -1167,7 +1216,7 @@ FcValueListSerializeAlloc (FcSerialize *serialize, const FcValueList *vl)
     {
 	if (!FcSerializeAlloc (serialize, vl, sizeof (FcValueList)))
 	    return FcFalse;
-	switch (vl->value.type) {
+	switch ((int) vl->value.type) {
 	case FcTypeString:
 	    if (!FcStrSerializeAlloc (serialize, vl->value.u.s))
 		return FcFalse;
@@ -1213,7 +1262,7 @@ FcValueListSerialize (FcSerialize *serialize, const FcValueList *vl)
 	
 	vl_serialized->next = NULL;
 	vl_serialized->value.type = vl->value.type;
-	switch (vl->value.type) {
+	switch ((int) vl->value.type) {
 	case FcTypeInteger:
 	    vl_serialized->value.u.i = vl->value.u.i;
 	    break;

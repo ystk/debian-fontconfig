@@ -1,3 +1,98 @@
+fontconfig (2.11.0-6) unstable; urgency=medium
+
+  [ Keith Packard ]
+  * Fix misplaced 11-lcdfilter-default.conf. Closes: #731724.
+  * Remove spurious /etc/fonts.conf.d.
+
+  [ Josselin Mouette ]
+  * Add conf.avail directory to the udeb. Closes: #739011.
+  * Use xz compression for the “upstream” tarball.
+
+ -- Josselin Mouette <joss@debian.org>  Wed, 13 Aug 2014 19:52:24 +0200
+
+fontconfig (2.11.0-5) unstable; urgency=medium
+
+  * Add documentation about how to build stuff
+  * Add patch including documentation. Closes #739743.
+  * Let dpkg remove /etc/fonts/conf.d. Closes: #739785.
+
+ -- Keith Packard <keithp@keithp.com>  Sun, 23 Feb 2014 17:09:30 -0800
+
+fontconfig (2.11.0-4) unstable; urgency=medium
+
+  * Remove spurious files from fontconfig-config package
+
+ -- Keith Packard <keithp@keithp.com>  Fri, 21 Feb 2014 17:48:07 -0800
+
+fontconfig (2.11.0-3) unstable; urgency=low
+
+  * Regenerate files as needed for build from upstream git repository
+  * Add debian/gbp.conf to control git-buildpackage
+  * Remove links made in /etc/fonts/conf.d and debconf entries. Closes #730361.
+
+ -- Keith Packard <keithp@keithp.com>  Fri, 21 Feb 2014 16:23:16 -0800
+
+fontconfig (2.11.0-2) unstable; urgency=low
+
+  * fontconfig-config.postrm: be less aggressive in removing fonts.d.
+    Closes: #728598.
+  * Break xpdf (<= 3.03-11). Closes: #728444.
+  * 01_path_max.patch: patch from Samuel Thibault to stop requiring 
+    PATH_MAX. Closes: #729189.
+  * fontconfig-config.links: enable lcdfilter by default.
+    Closes: #638262, #605574.
+  * 02_indic_names.patch: patch from Vasudev Kamath to fix Indic font 
+    family names. Closes: #661245.
+  * Mark libfontconfig1-dev as multi-arch: same. Closes: #677885.
+  * 03_locale_c.utf8.patch: based on a patch from Martin Dickopp. Treat 
+    C.UTF-8 and C.utf8 locales as built in the C library.
+    Closes: #717423.
+  * Update font packages names. Closes: #712682.
+  * Enable fonts-liberation as an alternative. Closes: #663553.
+  * Also drop alternate dependency on gsfonts-x11.
+  * 04_mgopen_fonts.patch: new patch. Add more MgOpen fonts to default 
+    sans typefaces. Closes: #400767.
+  * ja.po: updated. Closes: #695078.
+
+ -- Josselin Mouette <joss@debian.org>  Fri, 22 Nov 2013 10:15:58 +0100
+
+fontconfig (2.11.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * fontconfig-config.preinst: removed, not needed anymore.
+  * Add build-dependency on gperf.
+  * Bump shlibs.
+  * 01_conf.d_README.patch: dropped, obsolete.
+
+ -- Josselin Mouette <joss@debian.org>  Sun, 20 Oct 2013 20:02:49 +0200
+
+fontconfig (2.10.2-2) unstable; urgency=low
+
+  * 01_conf.d_README.patch: new patch. Document the two locations for 
+    conf.avail files.
+  * fontconfig-config.postrm: don’t remove conf.avail on uninstall. 
+    Closes: #714164.
+  * fontconfig-config.postinst: remove the symlink of the old 
+    conf.avail. Closes: #714157.
+  * fontconfig-config.preinst: add a cleanup script for the broken 
+    2.10.2-1 version.
+
+ -- Josselin Mouette <joss@debian.org>  Wed, 26 Jun 2013 20:44:27 +0200
+
+fontconfig (2.10.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Bump shlibs to 2.10.
+  * Wrap build-dependencies.
+  * architecture-with-small-double-align: dropped, merged upstream.
+  * Add missing build-dependency on pkg-config.
+  * fontconfig-config.maintscripts: remove obsolete conffiles.
+  * Remove obsolete maintainer scripts.
+  * Replace the old conf.avail directory by a symbolic link.
+  * Update installation listings.
+
+ -- Josselin Mouette <joss@debian.org>  Tue, 25 Jun 2013 20:34:02 +0200
+
 fontconfig (2.9.0-7.1) unstable; urgency=low
 
   * Non-maintainer upload.

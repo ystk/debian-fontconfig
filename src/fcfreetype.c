@@ -775,47 +775,26 @@ FcSfntNameLanguage (FT_SfntName *sname)
 /* Order is significant.  For example, some B&H fonts are hinted by
    URW++, and both strings appear in the notice. */
 
-static const char notice_foundry_data[] =
-	"Bigelow\0b&h\0"
-	"Adobe\0adobe\0"
-	"Bitstream\0bitstream\0"
-	"Monotype\0monotype\0"
-	"Linotype\0linotype\0"
-	"LINOTYPE-HELL\0linotype\0"
-	"IBM\0ibm\0"
-	"URW\0urw\0"
-	"International Typeface Corporation\0itc\0"
-	"Tiro Typeworks\0tiro\0"
-	"XFree86\0xfree86\0"
-	"Microsoft\0microsoft\0"
-	"Omega\0omega\0"
-	"Font21\0hwan\0"
-	"HanYang System\0hanyang";
-
-struct _notice_foundry {
-    /* these are the offsets into the
-     * notice_foundry_data array.
-     */
-    unsigned char notice_offset;
-    unsigned char foundry_offset;
-};
-
-static const struct _notice_foundry FcNoticeFoundries[] = {
-    { 0, 8 },
-    { 12, 18 },
-    { 24, 34 },
-    { 44, 53 },
-    { 62, 71 },
-    { 80, 94 },
-    { 103, 107 },
-    { 111, 115 },
-    { 119, 154 },
-    { 158, 173 },
-    { 178, 186 },
-    { 194, 204 },
-    { 214, 220 },
-    { 226, 233 },
-    { 238, 253 }
+static const char *FcNoticeFoundries[][2] =
+    {
+     {"Adobe", "adobe"},
+     {"Bigelow", "b&h"},
+     {"Bitstream", "bitstream"},
+     {"Gnat", "culmus"},
+     {"Iorsh", "culmus"},
+     {"HanYang System", "hanyang"},
+     {"Font21", "hwan"},
+     {"IBM", "ibm"},
+     {"International Typeface Corporation", "itc"},
+     {"Linotype", "linotype"},
+     {"LINOTYPE-HELL", "linotype"},
+     {"Microsoft", "microsoft"},
+     {"Monotype", "monotype"},
+     {"Omega", "omega"},
+     {"Tiro Typeworks", "tiro"},
+     {"URW", "urw"},
+     {"XFree86", "xfree86"},
+     {"Xorg", "xorg"},
 };
 
 #define NUM_NOTICE_FOUNDRIES	(int) (sizeof (FcNoticeFoundries) / sizeof (FcNoticeFoundries[0]))
@@ -828,9 +807,8 @@ FcNoticeFoundry(const FT_String *notice)
     if (notice)
 	for(i = 0; i < NUM_NOTICE_FOUNDRIES; i++)
         {
-            const struct _notice_foundry *nf = &FcNoticeFoundries[i];
-            const char *n = notice_foundry_data + nf->notice_offset;
-            const char *f = notice_foundry_data + nf->foundry_offset;
+            const char *n = FcNoticeFoundries[i][0];
+            const char *f = FcNoticeFoundries[i][1];
 
 	    if (strstr ((const char *) notice, n))
 		return (const FcChar8 *) f;
@@ -871,6 +849,7 @@ static const struct {
     { "B&H",  "b&h"},
     { "BITS", "bitstream"},
     { "CANO", "cannon"},
+    { "CLM",  "culmus"},
     { "DYNA", "dynalab"},
     { "EPSN", "epson"},
     { "FJ",   "fujitsu"},
@@ -1005,7 +984,6 @@ static const FcStringConst  slantConsts[] = {
 
 #define NUM_SLANT_CONSTS    (int) (sizeof (slantConsts) / sizeof (slantConsts[0]))
 
-#define FcIsSlant(s)	    FcStringIsConst(s,slantConsts,NUM_SLANT_CONSTS)
 #define FcContainsSlant(s)  FcStringContainsConst (s,slantConsts,NUM_SLANT_CONSTS)
 
 static const FcStringConst  decorativeConsts[] = {
@@ -1019,7 +997,6 @@ static const FcStringConst  decorativeConsts[] = {
 
 #define NUM_DECORATIVE_CONSTS	(int) (sizeof (decorativeConsts) / sizeof (decorativeConsts[0]))
 
-#define FcIsDecorative(s)   FcStringIsConst(s,decorativeConsts,NUM_DECORATIVE_CONSTS)
 #define FcContainsDecorative(s)	FcStringContainsConst (s,decorativeConsts,NUM_DECORATIVE_CONSTS)
 
 static double
@@ -1119,11 +1096,17 @@ FcFreeTypeQueryFace (const FT_Face  face,
     int		    nstyle_lang = 0;
     int		    nfullname = 0;
     int		    nfullname_lang = 0;
-    int		    p, platform;
-    int		    n, nameid;
+    unsigned int    p, n;
+    int		    platform, nameid;
 
     FcChar8	    *style = 0;
     int		    st;
+    char	    psname[256];
+    const char	    *tmp;
+
+    FcChar8	    *hashstr = NULL;
+    FT_Error	    err;
+    FT_ULong	    len = 0, alen;
 
     pat = FcPatternCreate ();
     if (!pat)
@@ -1179,10 +1162,11 @@ FcFreeTypeQueryFace (const FT_Face  face,
 
 	    for (snamei = 0; snamei < snamec; snamei++)
 	    {
-		FcChar8		*utf8;
+		FcChar8		*utf8, *pp;
 		const FcChar8	*lang;
 		const char	*elt = 0, *eltlang = 0;
 		int		*np = 0, *nlangp = 0;
+		size_t		len;
 
 		if (FT_Get_Sfnt_Name (face, snamei, &sname) != 0)
 		    continue;
@@ -1200,7 +1184,7 @@ FcFreeTypeQueryFace (const FT_Face  face,
 		}
 		else
 		{
-		    int	    sp;
+		    unsigned int	sp;
 
 		    for (sp = 0; sp < NUM_PLATFORM_ORDER; sp++)
 			if (sname.platform_id == platform_order[sp])
@@ -1221,7 +1205,6 @@ FcFreeTypeQueryFace (const FT_Face  face,
 		case TT_NAME_ID_PREFERRED_FAMILY:
 		case TT_NAME_ID_FONT_FAMILY:
 #if 0	
-		case TT_NAME_ID_PS_NAME:
 		case TT_NAME_ID_UNIQUE_ID:
 #endif
 		    if (FcDebug () & FC_DBG_SCANV)
@@ -1253,6 +1236,18 @@ FcFreeTypeQueryFace (const FT_Face  face,
 #endif
 		case TT_NAME_ID_PREFERRED_SUBFAMILY:
 		case TT_NAME_ID_FONT_SUBFAMILY:
+		    if (utf8)
+		    {
+			pp = utf8;
+			while (*pp == ' ')
+			    pp++;
+			len = strlen ((const char *) pp);
+			memmove (utf8, pp, len + 1);
+			pp = utf8 + len - 1;
+			while (*pp == ' ')
+			    pp--;
+			*(pp + 1) = 0;
+		    }
 		    if (FcDebug () & FC_DBG_SCANV)
 			printf ("found style  (n %2d p %d e %d l 0x%04x) %s\n",
 				sname.name_id, sname.platform_id,
@@ -1354,6 +1349,52 @@ FcFreeTypeQueryFace (const FT_Face  face,
 	free (family);
 	++nfamily;
     }
+
+    /* Add the PostScript name into the cache */
+    tmp = FT_Get_Postscript_Name (face);
+    if (!tmp)
+    {
+	FcChar8 *family, *familylang = NULL;
+	size_t len;
+	int n = 0;
+
+	/* Workaround when FT_Get_Postscript_Name didn't give any name.
+	 * try to find out the English family name and convert.
+	 */
+	while (FcPatternObjectGetString (pat, FC_FAMILYLANG_OBJECT, n, &familylang) == FcResultMatch)
+	{
+	    if (FcStrCmp (familylang, (const FcChar8 *)"en") == 0)
+		break;
+	    n++;
+	    familylang = NULL;
+	}
+	if (!familylang)
+	    n = 0;
+
+	if (FcPatternObjectGetString (pat, FC_FAMILY_OBJECT, n, &family) != FcResultMatch)
+	    goto bail1;
+	len = strlen ((const char *)family);
+	/* the literal name in PostScript Language is limited to 127 characters though,
+	 * It is the architectural limit. so assuming 255 characters may works enough.
+	 */
+	for (i = 0; i < len && i < 255; i++)
+	{
+	    /* those characters are not allowed to be the literal name in PostScript */
+	    static const char exclusive_chars[] = "\x04()/<>[]{}\t\f\r\n ";
+
+	    if (strchr(exclusive_chars, family[i]) != NULL)
+		psname[i] = '-';
+	    else
+		psname[i] = family[i];
+	}
+	psname[i] = 0;
+    }
+    else
+    {
+	strcpy (psname, tmp);
+    }
+    if (!FcPatternAddString (pat, FC_POSTSCRIPT_NAME, (const FcChar8 *)psname))
+	goto bail1;
 
     if (!FcPatternAddString (pat, FC_FILE, file))
 	goto bail1;
@@ -1623,6 +1664,47 @@ FcFreeTypeQueryFace (const FT_Face  face,
     if (!FcPatternAddBool (pat, FC_DECORATIVE, decorative))
 	goto bail1;
 
+    err = FT_Load_Sfnt_Table (face, 0, 0, NULL, &len);
+    if (err == FT_Err_Ok)
+    {
+	char *fontdata;
+
+	alen = (len + 63) & ~63;
+	fontdata = malloc (alen);
+	if (!fontdata)
+	    goto bail3;
+	err = FT_Load_Sfnt_Table (face, 0, 0, (FT_Byte *)fontdata, &len);
+	if (err != FT_Err_Ok)
+	{
+	    free (fontdata);
+	    goto bail3;
+	}
+	memset (&fontdata[len], 0, alen - len);
+	hashstr = FcHashGetSHA256DigestFromMemory (fontdata, len);
+	free (fontdata);
+    }
+    else if (err == FT_Err_Invalid_Face_Handle)
+    {
+	/* font may not support SFNT. falling back to
+	 * read the font data from file directly
+	 */
+	hashstr = FcHashGetSHA256DigestFromFile (file);
+    }
+    else
+    {
+	goto bail3;
+    }
+    if (hashstr)
+    {
+	if (!FcPatternAddString (pat, FC_HASH, hashstr))
+	{
+	    free (hashstr);
+	    goto bail1;
+	}
+	free (hashstr);
+    }
+bail3:
+
     /*
      * Compute the unicode coverage for the font
      */
@@ -1695,7 +1777,8 @@ FcFreeTypeQueryFace (const FT_Face  face,
     {
 	const char *font_format = FT_Get_X11_Font_Format (face);
 	if (font_format)
-	    FcPatternAddString (pat, FC_FONTFORMAT, (FcChar8 *) font_format);
+	    if (!FcPatternAddString (pat, FC_FONTFORMAT, (FcChar8 *) font_format))
+		goto bail2;
     }
 #endif
 
@@ -2249,7 +2332,7 @@ FcFreeTypeCheckGlyph (FT_Face face, FcChar32 ucs4,
 
     *advance = slot->metrics.horiAdvance;
 
-    switch (slot->format) {
+    switch ((int) slot->format) {
     case ft_glyph_format_bitmap:
 	/*
 	 * Bitmaps are assumed to be reasonable; if
@@ -2561,7 +2644,8 @@ FcFreeTypeCharSet (FT_Face face, FcBlanks *blanks)
  * except for 'DFLT'.
  */
 #define FcIsSpace(x)	    (040 == (x))
-#define FcIsValidScript(x)  (FcIsLower(x) || FcIsUpper (x) || FcIsSpace(x))
+#define FcIsDigit(c)	    (('0' <= (c) && (c) <= '9'))
+#define FcIsValidScript(x)  (FcIsLower(x) || FcIsUpper (x) || FcIsDigit(x) || FcIsSpace(x))
 			
 static void
 addtag(FcChar8 *complex_, FT_ULong tag)
@@ -2574,7 +2658,7 @@ addtag(FcChar8 *complex_, FT_ULong tag)
     tagstring[3] = (FcChar8)(tag);
     tagstring[4] = '\0';
 
-    /* skip tags which aren't alphabetic, under the assumption that
+    /* skip tags which aren't alphanumeric, under the assumption that
      * they're probably broken
      */
     if (!FcIsValidScript(tagstring[0]) ||
@@ -2585,7 +2669,7 @@ addtag(FcChar8 *complex_, FT_ULong tag)
 
     if (*complex_ != '\0')
 	strcat ((char *) complex_, " ");
-    strcat ((char *) complex_, "otlayout:");
+    strcat ((char *) complex_, OTLAYOUT_HEAD);
     strcat ((char *) complex_, (char *) tagstring);
 }
 

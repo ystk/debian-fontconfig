@@ -3,7 +3,14 @@ Section: fonts
 Priority: optional
 Maintainer: Keith Packard <keithp@debian.org>
 Uploaders: Josselin Mouette <joss@debian.org>
-Build-Depends: cdbs (>= 0.4.93), debhelper (>= 9), libfreetype6-dev (>= 2.1.7), libexpat1-dev, binutils (>= 2.12.90.0.9), po-debconf
+Build-Depends: cdbs (>= 0.4.93),
+               debhelper (>= 9),
+               libfreetype6-dev (>= 2.1.7),
+               libexpat1-dev,
+               binutils (>= 2.12.90.0.9),
+               pkg-config,
+               gperf,
+               po-debconf
 Standards-Version: 3.9.3
 
 Package: fontconfig
@@ -32,7 +39,9 @@ Description: generic font configuration library - support binaries
 Package: fontconfig-config
 Section: fonts
 Architecture: all
-Depends: ${misc:Depends}, ucf (>= 0.29), ttf-dejavu-core | ttf-bitstream-vera | ttf-freefont | gsfonts-x11
+Depends: ${misc:Depends},
+         ucf (>= 0.29),
+         fonts-dejavu-core | ttf-bitstream-vera | fonts-liberation | fonts-freefont
 Replaces: fontconfig (<< 2.3.2-2)
 Conflicts: fontconfig (<< 2.3.2-2)
 Multi-Arch: foreign
@@ -62,6 +71,7 @@ Description: generic font configuration library - minimal runtime
 Package: libfontconfig1-dev
 Section: libdevel
 Architecture: any
+Multi-Arch: same
 Depends: libfontconfig1 (= ${binary:Version}), ${misc:Depends}, libexpat1-dev, libfreetype6-dev (>= 2.1.7), pkg-config
 Provides: libfontconfig-dev
 Description: generic font configuration library - development
@@ -78,7 +88,8 @@ Section: libs
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${shlibs:Depends}, ${misc:Depends}, fontconfig-config (= ${source:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, fontconfig-config (>= ${source:Version})
+Breaks: xpdf (<= 3.03-11)
 Provides: libfontconfig
 Description: generic font configuration library - runtime
  Fontconfig is a font configuration and customization library, which
