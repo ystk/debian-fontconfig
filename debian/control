@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Keith Packard <keithp@debian.org>
 Uploaders: Josselin Mouette <joss@debian.org>
 Build-Depends: cdbs (>= 0.4.93),
+               dh-autoreconf,
                debhelper (>= 9),
                libfreetype6-dev (>= 2.1.7),
                libexpat1-dev,
@@ -17,6 +18,7 @@ Package: fontconfig
 Section: fonts
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, fontconfig-config
+Pre-Depends: dpkg (>= 1.16.1)
 Replaces: fontconfig-config (<< 2.5.93-1)
 Multi-Arch: foreign
 Description: generic font configuration library - support binaries
