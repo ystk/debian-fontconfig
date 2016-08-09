@@ -3,3 +3,4 @@
 03_locale_c.utf8.patch
 04_mgopen_fonts.patch
 05_doc_files.patch
+06_CVE-2016-5384-Properly-validate-offsets-in-cache-files.patch
